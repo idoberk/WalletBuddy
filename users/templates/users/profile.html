@@ -1,0 +1,25 @@
+{% extends 'website/base.html' %}
+{% load crispy_forms_filters %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+	    <div class="profile-page">
+		    <div>
+		        <h3 class="text-center">Profile Info</h3>
+		    </div>
+		    <div class="profile-form">
+			    <div class="d-flex justify-content-center align-items-lg-start">
+			        <form method="POST" enctype="multipart/form-data">
+			            {% csrf_token %}
+			            {{ user_form|crispy }}
+			            {{ profile_form|crispy }}
+			            <button class="btn btn-primary w-100 mt-3" type="submit">Save</button>
+			            <a href="{% url 'users:password_change' %}" class="btn btn-secondary w-100 mt-3">Change Password</a>
+			            <a href="{% url 'users:delete' %}" class="btn btn-danger w-100 mt-3">Delete Account</a>
+			        </form>
+			    </div>
+		    </div>
+	    </div>
+    </div>
+{% endblock content %}

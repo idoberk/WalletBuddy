@@ -1,0 +1,31 @@
+{% extends 'website/base.html' %}
+{% load crispy_forms_filters %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="d-flex justify-content-center align-items-lg-start min-vh-100">
+        <div class="card p-4" style="max-width: 400px; width: 100%;">
+            <fieldset class="form-group">
+                <legend class="border-bottom text-center mb-3 pb-2">Log In</legend>
+            </fieldset>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group w-100 mt-3">
+                    <input type="text" name="username" class="form-control p-2" placeholder="Username" required>
+                </div>
+                <div class="form-group w-100 mt-3">
+                    <input type="password" name="password" class="form-control p-2" placeholder="Password" required>
+                </div>
+                <button class="btn btn-primary w-100 mt-3" type="submit">Login</button>
+                <small class="text-muted ml-2">
+                    <a href="{% url 'users:password_reset' %}">Forgot Password?</a>
+                </small>
+            </form>
+            <div class="text-center border-top pt-3 mt-3">
+                <small class="text-muted">
+                    Need An Account? <a class="ml-2" href="{% url 'users:register' %}">Sign Up Now</a>
+                </small>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

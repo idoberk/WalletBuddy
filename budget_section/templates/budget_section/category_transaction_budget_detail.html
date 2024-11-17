@@ -1,0 +1,37 @@
+{% extends 'website/base.html' %}
+{% block content %}
+	<div class="row">
+		<div class="col-lg-8 mx-auto">
+			<h1>{{ object }} {{ detail_what }}</h1>
+			<ul>
+				{% if detail_what == 'Budget' %}
+					<li>{{ object.name }}</li>
+					<li>{{ object.amount }}$</li>
+					<li>{{ object.start_date|date:"d F, Y" }}</li>
+					<li>{{ object.end_date|date:"d F, Y" }}</li>
+				{% elif detail_what == "Category" %}
+					<li>{{ object.name }}</li>
+					<li>{{ object.description }}</li>
+				{% elif detail_what == 'Transaction' %}
+					<li>{{ object.title }}</li>
+					<li>{{ object.amount }}$</li>
+					<li>{{ object.category }}</li>
+					<li>{{ object.budget }}</li>
+					<li>{{ object.date|date:"d F, Y" }}</li>
+					<li>{{ object.notes }}</li>
+				{% endif %}
+			</ul>
+			{% if detail_what == 'Budget' %}
+				<a href="{% url 'budget_section:budget_summary' object.slug %}">Current Period</a><br>
+				<a href="{% url 'budget_section:budget_update' object.slug %}">Update</a><br>
+				<a href="{% url 'budget_section:budget_delete' object.slug %}" style="color: red;">Delete</a>
+			{% elif detail_what == "Category" %}
+				<a href="{% url 'budget_section:category_update' object.slug %}">Update</a><br>
+				<a href="{% url 'budget_section:category_delete' object.slug %}">Delete</a>
+			{% elif detail_what == "Transaction" %}
+				<a href="{% url 'budget_section:transaction_update' object.slug %}">Update</a><br>
+				<a href="{% url 'budget_section:transaction_delete' object.slug %}">Delete</a>
+			{% endif %}
+		</div>
+	</div>
+{% endblock content %}

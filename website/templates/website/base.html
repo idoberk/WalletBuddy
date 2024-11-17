@@ -1,0 +1,193 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://kit.fontawesome.com/ae360af17e.js" crossorigin="anonymous"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+	      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+	<title>WalletBuddy</title>
+</head>
+
+<body>
+	<!-- URLS -->
+	{% url 'app-home' as home_page %}
+	{% url 'users:profile' as user_profile %}
+	{% url 'users:login' as user_login %}
+	{% url 'users:logout' as user_logout %}
+	{% url 'users:register' as user_register %}
+	{% url 'budget_section:budget_create' as create_budget %}
+	{% url 'budget_section:budget_list' as budget_list %}
+	{% url 'budget_section:category_create' as create_category %}
+	{% url 'budget_section:category_list' as category_list %}
+	{% url 'budget_section:transaction_create' as create_transaction %}
+	{% url 'budget_section:transaction_list' as transaction_list %}
+	{% url 'finance_section:current_period' as finance_current_period %}
+	{% url 'finance_section:income_create' as create_income %}
+	{% url 'finance_section:income_list' as income_list %}
+	{% url 'finance_section:outcome_create' as create_outcome %}
+	{% url 'finance_section:outcome_list' as outcome_list %}
+	{% url 'finance_section:balance_create' as create_balance %}
+	{% url 'finance_section:balance_list' as balance_list %}
+	<!-- URLS END -->
+	<div class="wrapper">
+		<!-- Sidebar -->
+		<aside id="sidebar">
+			<div class="h-100">
+				<div class="sidebar-logo">
+					<a href="{{ home_page }}">WalletBuddy</a>
+				</div>
+				<!-- Sidebar Navigation -->
+				<ul class="sidebar-nav">
+					<li class="sidebar-header">Apps</li>
+{#					<li class="sidebar-item">#}
+{#						<a href="{{ user_profile }}" class="sidebar-link">#}
+{#							<i class="fa-solid fa-list pe-2"></i>#}
+{#							Profile#}
+{#						</a>#}
+{#					</li>#}
+					<li class="sidebar-item">
+						<a class="sidebar-link collapsed" data-bs-toggle="collapse"
+						   data-bs-target="#my_finances" aria-expanded="false" aria-controls="my_finances">
+							<i class="fa-solid fa-chart-line pe-2"></i>
+							Finances Section
+						</a>
+						<ul id="my_finances" class="sidebar-dropdown list-unstyled collapse custom-indent" data-bs-parent="#sidebar">
+							<li class="sidebar-item">
+								<a href="{{ finance_current_period }}" class="sidebar-link">Current Period</a>
+							</li>
+							<li class="sidebar-item">
+								<a href="{{ create_income }}" class="sidebar-link">Add Income</a>
+							</li>
+							<li class="sidebar-item">
+								<a href="{{ create_outcome }}" class="sidebar-link">Add Outcome</a>
+							</li>
+							<li class="sidebar-item">
+								<a href="{{ create_balance }}" class="sidebar-link">Add Balance</a>
+							</li>
+							<li class="sidebar-item">
+								<a href="{{ income_list }}" class="sidebar-link">Incomes List</a>
+							</li>
+							<li class="sidebar-item">
+								<a href="{{ outcome_list }}" class="sidebar-link">Outcomes List</a>
+							</li>
+							<li class="sidebar-item">
+								<a href="{{ balance_list }}" class="sidebar-link">Balances List</a>
+							</li>
+						</ul>
+					</li>
+					<li class="sidebar-item">
+						<a class="sidebar-link collapsed" data-bs-toggle="collapse"
+						   data-bs-target="#budget_section" aria-expanded="false" aria-controls="budget_section">
+							<i class="fa-solid fa-wallet pe-2"></i>
+							Budget Section
+						</a>
+						<ul id="budget_section" class="sidebar-dropdown list-unstyled collapse custom-indent" data-bs-parent="#sidebar">
+							<li class="sidebar-item">
+								<a href="{{ create_budget }}" class="sidebar-link">Add Budget</a>
+							</li>
+							<li class="sidebar-item">
+								<a href="{{ create_category }}" class="sidebar-link">Add Category</a>
+							</li>
+							<li class="sidebar-item">
+								<a href="{{ create_transaction }}" class="sidebar-link">Add Transaction</a>
+							</li>
+							<li class="sidebar-item">
+								<a href="{{ budget_list }}" class="sidebar-link">Budgets List</a>
+							</li>
+							<li class="sidebar-item">
+								<a href="{{ category_list }}" class="sidebar-link">Categories List</a>
+							</li>
+							<li class="sidebar-item">
+								<a href="{{ transaction_list }}" class="sidebar-link">Transactions List</a>
+							</li>
+						</ul>
+					</li>
+					<li class="sidebar-item">
+						<a class="sidebar-link collapsed text-capitalize" data-bs-toggle="collapse"
+						   data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
+							<i class="fas fa-user pe-2"></i>
+							{% if user.is_authenticated %}
+								{{ user.username }}
+							{% else %}
+								Auth
+							{% endif %}
+						</a>
+						<ul id="auth" class="sidebar-dropdown list-unstyled collapse custom-indent" data-bs-parent="#sidebar">
+							{% if user.is_authenticated %}
+								<li class="sidebar-item">
+									<a href="{{ user_profile }}" class="sidebar-link">Profile</a>
+								</li>
+							{% else %}
+								<li class="sidebar-item">
+									<a href="{{ user_login }}" class="sidebar-link">Login</a>
+								</li>
+								<li class="sidebar-item">
+									<a href="{{ user_register }}" class="sidebar-link">Register</a>
+								</li>
+							{% endif %}
+						</ul>
+					</li>
+					{% if user.is_authenticated %}
+						<li class="sidebar-item">
+							<a href="{{ user_logout }}" class="sidebar-link">
+								<i class="fas fa-sign-out-alt fa-fw"></i>
+								Logout
+							</a>
+						</li>
+					{% endif %}
+				</ul>
+			</div>
+		</aside>
+		<!-- Main Component -->
+		<div class="main">
+			<nav class="navbar navbar-expand px-3 border-bottom">
+				<!-- Button for sidebar toggle -->
+				<button class="btn" type="button">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+			</nav>
+			<main class="content px-3 py-2">
+				<div class="container-fluid">
+					<div class="mb-3">
+						{% if messages %}
+							{% for message in messages %}
+								<div class="alert alert-{% if message.tags == 'error' %}warning
+										{% else %}{{ message.tags }}{% endif %} fade-out">
+									{{ message }}
+								</div>
+							{% endfor %}
+						{% endif %}
+						{% block content %}
+
+						{% endblock content %}
+
+					</div>
+				</div>
+			</main>
+			<footer class="sticky-footer bottom-right">
+				<div class="container my-auto">
+					<div class="copyright my-auto">
+						<span>Copyright &copy; WalletBuddy {{ today.year }}</span>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+	        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+	        crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+	        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+	        crossorigin="anonymous"></script>
+	<script src="{% static 'script.js' %}"></script>
+	<script src="{% static 'alert.js' %}"></script>
+	{% block js %}
+
+	{% endblock js %}
+</body>
+</html>

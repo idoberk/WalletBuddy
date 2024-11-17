@@ -1,0 +1,29 @@
+{% extends 'website/base.html' %}
+{% block content %}
+	<div class="row">
+		<div class="col-lg-8 mx-auto">
+			<h1>{{ object.get_type_display }} {{ detail_what }}</h1>
+			<ul>
+				<li>Date: {{ object.date|date }}</li>
+				<li>Type: {{ object.get_type_display }}</li>
+				<li>Value: {{ object.value }}$</li>
+				{% if detail_what != 'Balance' %}
+					<li>Repetitive: {{ object.repetitive }}</li>
+					{% if object.repetitive %}
+						<li>Every {{ object.repetition_time }} {{ object.get_repetition_interval_display }}</li>
+					{% endif %}
+				{% endif %}
+			</ul>
+			{% if detail_what == 'Income' %}
+				<a href="{% url 'finance_section:income_update' object.id %}">Update</a><br>
+				<a href="{% url 'finance_section:income_delete' object.id %}">Delete</a>
+			{% elif detail_what == "Outcome" %}
+				<a href="{% url 'finance_section:outcome_update' object.id %}">Update</a><br>
+				<a href="{% url 'finance_section:outcome_delete' object.id %}">Delete</a>
+			{% elif detail_what == "Balance" %}
+				<a href="{% url 'finance_section:balance_update' object.id %}">Update</a><br>
+				<a href="{% url 'finance_section:balance_delete' object.id %}">Delete</a>
+			{% endif %}
+		</div>
+	</div>
+{% endblock content %}

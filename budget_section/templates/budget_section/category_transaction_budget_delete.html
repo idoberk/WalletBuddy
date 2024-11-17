@@ -1,0 +1,14 @@
+{% extends 'website/base.html' %}
+{% block content %}
+	<div class="row">
+		<div class="col-lg-8 mx-auto">
+			<h1>{{ object }} {{ delete_what }}</h1>
+			<form method="POST">
+				{% csrf_token %}
+				<p>Are you sure you want to delete "{{ object }}"?</p>
+				<input type="submit" value="Confirm" class="btn btn-danger">
+				<a href="{% url 'app-home' %}" class="btn btn-secondary">Cancel</a>
+		</form>
+		</div>
+	</div>
+{% endblock content %}
