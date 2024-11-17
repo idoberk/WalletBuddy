@@ -12,7 +12,7 @@ WalletBuddy uses the following technologies:
 
 
 
-This is not a finished product. There are still bugs that needs to be fixed, and I will continue on improving the application overtime.
+This is not a finished product and is still a work in progress. There are still bugs that needs to be fixed, and I will continue on improving the application overtime.
 
 ## Disclaimer
 WalletBuddy is for development purposes only and is not intended for use in production.
