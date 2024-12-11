@@ -10,7 +10,13 @@ WalletBuddy uses the following technologies:
 - Bootstrap: a popular CSS framework for building responsive websites
 - AWS: a cloud computing platform that provides scalable and reliable services for hosting, storage, and other infrastructure needs
 
+![login page](https://github.com/idoberk/WalletBuddy/blob/main/login%20page.png)
 
+![profile page](https://github.com/idoberk/WalletBuddy/blob/main/profile%20page.png)
+
+![budget section](https://github.com/idoberk/WalletBuddy/blob/main/budget%20section.png)
+
+![finance section](https://github.com/idoberk/WalletBuddy/blob/main/finance%20section.png)
 
 This is not a finished product and is still a work in progress. There are still bugs that needs to be fixed, and I will continue on improving the application overtime.
 
